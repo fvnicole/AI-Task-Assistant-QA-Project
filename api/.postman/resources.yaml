@@ -1,0 +1,15 @@
+# Use this workspace to collaborate
+workspace:
+  id: d46e37dd-c517-4290-8727-eb83dc904818
+
+localResources:
+  collections:
+    - ../AITaskAssistantAPITesting
+    - ../AI Task Assistant - API Testing
+
+# Each entry here maps a local resource to one or more corresponding objects in Postman Cloud
+
+cloudResources:
+  collections:
+    ../AITaskAssistantAPITesting: 57596994-6caf0a19-9f00-481c-be17-50c87ed1d00d
+    ../AI Task Assistant - API Testing: 57596994-0eb4071b-562f-4c7f-815c-075692305cc2

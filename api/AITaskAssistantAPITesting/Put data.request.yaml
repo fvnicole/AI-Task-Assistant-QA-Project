@@ -1,0 +1,30 @@
+$kind: http-request
+description: |-
+  This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.
+
+  A successful POST request typically returns a `200 OK` or `201 Created` response code.
+url: https://gorest.co.in/public/v2/users/8585225
+method: PUT
+headers:
+  Authorization: Bearer 585f70a26fc74ca04e99039a3b14c6673f6a49eb140ceb8234b108deabccc9da
+  Content-Type: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Cole QA",
+      "gender": "female",
+      "email": "{{randomEmail}}",
+      "status": "Inactive"
+    }
+scripts:
+  - type: afterResponse
+    code: |
+      pm.test("Successful POST request", function () {
+          pm.expect(pm.response.code).to.be.oneOf([200, 201]);
+      });
+    language: text/javascript
+  - type: beforeRequest
+    code: pm.variables.set("randomEmail", `NicoleTest.qa.${Date.now()}@example.com`);
+    language: text/javascript
+order: 3000
