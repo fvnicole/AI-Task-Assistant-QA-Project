@@ -116,3 +116,29 @@
 - AC13.3 Cypress tests must validate UI updates.
 - AC13.4 Cypress must generate evidence (screenshots/videos).
 - AC13.5 Cypress tests must run locally without backend changes.
+
+
+
+
+
+
+## US03 — Field Validation on Task Creation/Edit
+### As a user, I want the system to enforce sensible limits on task fields so that the data I save stays valid.
+- AC03.1 The title field must not be empty or contain only whitespace.
+- AC03.2 The title field has no maximum length enforced by the frontend, backend, or database.
+- AC03.3 The description field can be left empty when creating a task.
+- AC03.4 The description field must not be empty or contain only whitespace when editing an existing task, if the field is included in the update request.
+- AC03.5 The description field has no maximum length enforced by the frontend, backend, or database.
+
+---
+
+## US04 — Field Validation on Account Registration
+### As a user, I want the system to enforce sensible limits on my account fields so that registration data stays valid.
+- AC04.1 The name field must not be empty or contain only whitespace.
+- AC04.2 The name field has no maximum length enforced by the frontend, backend, or database.
+- AC04.3 The email field must match a basic email pattern (text@text.text) to be accepted.
+- AC04.4 The email field has no maximum length enforced by the frontend, backend, or database.
+- AC04.5 The password field must be at least 8 characters long.
+- AC04.6 The password field has no maximum length enforced by the frontend, backend, or database.
+
+---
