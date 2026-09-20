@@ -5,6 +5,10 @@
 - AC01.3 The task must appear in the task list immediately.
 - AC01.4 The task must be stored in the database with a unique ID.
 - AC01.5 The UI must confirm successful creation.
+- AC01.6 The title field must not be empty or contain only whitespace.
+- AC01.7 The title field has no maximum length enforced by the frontend, backend, or database.
+- AC01.8 The description field can be left empty when creating a task.
+- AC01.9 The description field has no maximum length enforced by the frontend, backend, or database.
 
 ---
 
@@ -15,6 +19,10 @@
 - AC02.3 The updated task must appear in the UI without refresh.
 - AC02.4 The database must reflect the updated description.
 - AC02.5 The system must prevent saving empty descriptions.
+- AC02.6 The title field, if included in the update, must not be empty or contain only whitespace.
+- AC02.7 The title field has no maximum length enforced by the frontend, backend, or database.
+- AC02.8 The description field, if included in the update, must not be empty or contain only whitespace.
+- AC02.9 The description field has no maximum length enforced by the frontend, backend, or database.
 
 ---
 
@@ -117,28 +125,38 @@
 - AC13.4 Cypress must generate evidence (screenshots/videos).
 - AC13.5 Cypress tests must run locally without backend changes.
 
+---
 
-
-
-
-
-## US03 — Field Validation on Task Creation/Edit
-### As a user, I want the system to enforce sensible limits on task fields so that the data I save stays valid.
-- AC03.1 The title field must not be empty or contain only whitespace.
-- AC03.2 The title field has no maximum length enforced by the frontend, backend, or database.
-- AC03.3 The description field can be left empty when creating a task.
-- AC03.4 The description field must not be empty or contain only whitespace when editing an existing task, if the field is included in the update request.
-- AC03.5 The description field has no maximum length enforced by the frontend, backend, or database.
+## US14 — Register a New Account
+### As a user, I want to create an account with my name, email, and password so that I can start using the app.
+- AC05.1 The user can enter their name, email, and password on the registration screen.
+- AC05.2 The system must send a POST request to the API with the entered data.
+- AC05.3 On valid data, the API must create a new user and return a JWT token and the user's data.
+- AC05.4 On successful registration, the UI must log the user in automatically and show the task list, without requiring a separate login step.
+- AC05.5 The system must reject registration if an account with that email already exists, and show an error message without creating a duplicate user.
+- AC05.6 The name field must not be empty or contain only whitespace.
+- AC05.7 The name field has no maximum length enforced by the frontend, backend, or database.
+- AC05.8 The email field must match a basic email pattern (text@text.text) to be accepted.
+- AC05.9 The email field has no maximum length enforced by the frontend, backend, or database.
+- AC05.10 The password field must be at least 8 characters long.
+- AC05.11 The password field has no maximum length enforced by the frontend, backend, or database.
 
 ---
 
-## US04 — Field Validation on Account Registration
-### As a user, I want the system to enforce sensible limits on my account fields so that registration data stays valid.
-- AC04.1 The name field must not be empty or contain only whitespace.
-- AC04.2 The name field has no maximum length enforced by the frontend, backend, or database.
-- AC04.3 The email field must match a basic email pattern (text@text.text) to be accepted.
-- AC04.4 The email field has no maximum length enforced by the frontend, backend, or database.
-- AC04.5 The password field must be at least 8 characters long.
-- AC04.6 The password field has no maximum length enforced by the frontend, backend, or database.
+## US15 — Log In
+### As a user, I want to log in with my email and password so that I can access my tasks.
+- AC06.1 The user can enter their email and password on the login screen.
+- AC06.2 The system must send a POST request to the API with the entered credentials.
+- AC06.3 On valid credentials, the API must return a JWT token and the user's data.
+- AC06.4 On successful login, the UI must store the session and show the user's task list without requiring a page reload.
+- AC06.5 The session must persist across page reloads — the app must restore the logged-in state using the stored token, without asking the user to log in again.
+- AC06.6 The email field must not be empty.
+- AC06.7 The password field must not be empty.
+- AC06.8 The email field has no maximum length enforced by the frontend, backend, or database.
+- AC06.9 The password field has no maximum length enforced by the frontend, backend, or database.
+- AC06.10 The frontend enforces a minimum password length of 8 characters before allowing the login form to be submitted, but the backend login endpoint itself does not enforce this minimum — a password shorter than 8 characters sent directly to the API is accepted for the check (it just fails authentication if it doesn't match the stored one). The 8-character minimum is only enforced by the backend on registration, not on login.
+- AC06.11 On invalid credentials (wrong email or wrong password), the system must reject the login and show an error message to the user.
+- AC06.12 The system must return the same generic error message ("credenciales invalidas" / "invalid credentials") whether the email does not exist or the password is incorrect, so as not to reveal which emails are registered.
 
 ---
+
