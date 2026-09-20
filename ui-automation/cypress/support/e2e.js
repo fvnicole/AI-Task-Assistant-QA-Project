@@ -15,3 +15,5 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+// This file is automatically loaded before test execution.
+// It imports custom commands and prepares the test environment.
