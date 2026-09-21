@@ -5,8 +5,12 @@ describe('Create Task', () => {
     cy.fullLogin(); // Run the reusable login flow
 
     // Fill in the task creation form fields
-    cy.get('#title').type('My first automated task');
-    cy.get('#description').type('This task was created using Cypress.');
+
+cy.get('#title').type('My first automated task');  // Types the task title into the title input field
+cy.get('#description').type('This task was created using Cypress.'); // Types the task description into the description input field
+cy.get('#category').select('urgent'); // Selects the desired category from the category dropdown
+cy.get('#priority').select('high'); // Selects the desired priority level from the priority dropdown
+
 
     // IMPORTANT:
     // The application briefly shows "Tasks (0 pending)" before the API finishes loading.
