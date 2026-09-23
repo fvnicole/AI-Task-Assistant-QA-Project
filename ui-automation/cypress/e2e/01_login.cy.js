@@ -1,51 +1,64 @@
-describe('Create Task - Authenticated Flow', () => {
+describe('Login Suite', () => {
 
-  it('Run the Login located in Commands.js ', () => {
+  beforeEach(() => {
+    cy.visit('/login');
+  });
 
-   
+  it('TC01 — Happy Path - valid email and password', () => { 
     cy.fullLogin();
 
+  });
+
+  it('TC02 — Non registered email', () => {
+
+   cy.get('#auth-email').type('InvalidMail@mail.com')
+   cy.get('#auth-password').type('12345678')
+   cy.get('[data-cy="auth-submit"]').click()
+   cy.get('[data-cy="auth-error"]')
+  .should('be.visible')
+  .and('contain', 'Invalid credentials');   
 
   });
 
-});
+  it('TC03 — Wrong email format', () => {
+    // ...
+  });
 
+  it('TC04 — Registered email + wrong password', () => {
+   cy.get('#auth-email').type('Test01@mail.com')
+   cy.get('#auth-password').type('5647891011')
+   cy.get('[data-cy="auth-submit"]').click()
+   cy.get('[data-cy="auth-error"]')
+  .should('be.visible')
+  .and('contain', 'Invalid credentials');
 
+  });
 
-//OLD LOGIN (NON REUSABLE)
-/*
-// Main test block.
-// Groups all tests related to handling slow application startup.
-describe('Load App - Slow Startup Handling', () => {
+  it('TC05 — Wrong email + wrong password', () => {
+   
+     cy.get('#auth-email').type('InvalidMail@mail.com')
+   cy.get('#auth-password').type('5647891011')
+   cy.get('[data-cy="auth-submit"]').click()
+   cy.get('[data-cy="auth-error"]')
+  .should('be.visible')
+  .and('contain', 'Invalid credentials');
 
-  // Verifies that the application loads correctly even when startup is slow.
-  it('should load the application even if startup is slow', () => {
+  });
 
-    // Loads external test data from: ui-automation/cypress/fixtures/loginData.json
-    // This allows using dynamic credentials instead of hardcoding them.
-    cy.fixture('loginData').then((data) => {
+  it('TC06 — Empty email field', () => {
+    // ...
+  });
 
-      // Increases the default command timeout ONLY for this test, because the first access to Render could be slow.
-       Cypress.config('defaultCommandTimeout', 280000);
+  it('TC07 — Empty password field', () => {
+    // ...
+  });
 
-      // Opens the application using the baseUrl defined in: ui-automation/cypress.config.js
-      // cy.visit('/') automatically resolves to the full baseUrl.
-      cy.visit('/', { timeout: 280000 });
+  it('TC08 — Password < 8 characters', () => {
+    // ...
+  });
 
-      // Confirms that the main login page has loaded by checking for the presence of the "AI Task Assistant" text.
-      // Uses an extended timeout in case the UI renders slowly.
-      cy.contains('AI Task Assistant', { timeout: 280000 })
-        .should('be.visible');
-
-      // Executes the custom login command defined in: ui-automation/cypress/support/commands.js
-      // cy.login(email, password) types the credentials and clicks "Log in".
-      cy.login(data.email, data.password);
-      cy.contains(data.username, { timeout: 280000 }) // Validate User Name after Login
-        .should('be.visible');
-    });
+  it('TC09 — Both fields empty', () => {
+    // ...
   });
 
 });
-*/
-
-
